@@ -1,0 +1,71 @@
+project-root/
+├── src/
+│   ├── config/
+│   │   ├── database.js       # MongoDB connection configuration (new, replaces db.js)
+│   │   ├── passport.js       # Passport authentication strategies (from passport.js)
+│   │   └── jwt.js            # JWT configuration and utilities (from auth.js)
+│   │
+│   ├── middlewares/
+│   │   ├── auth.middleware.js      # Authentication middleware (from authMiddleware.js)
+│   │   ├── upload.middleware.js    # File upload handling (placeholder)
+│   │   ├── error.middleware.js     # Centralized error handling (placeholder)
+│   │   └── passport.middleware.js  # Passport initialization (new, to initialize passport)
+│   │
+│   ├── utils/
+│   │   ├── helpers.js       # Utility functions (placeholder)
+│   │   ├── validators.js    # Shared validation logic (placeholder)
+│   │   └── logger.js        # Logging configuration (placeholder)
+│   │
+│   ├── constants/
+│   │   ├── messages.js      # All response messages (placeholder)
+│   │   └── statusCodes.js   # HTTP status codes constants (placeholder)
+│   │
+│   ├── modules/
+│   │   ├── auth/
+│   │   │   ├── auth.controller.js  # Auth route handlers (from authControllers.js)
+│   │   │   ├── auth.model.js       # Auth Mongoose model (placeholder, if needed)
+│   │   │   ├── auth.routes.js      # Auth Express routes (from authRouters.js)
+│   │   │   ├── auth.service.js     # Auth business logic (new, extracts logic from controller)
+│   │   │   ├── auth.validator.js   # Auth request validation (new, for input validation)
+│   │   │   └── __tests__/
+│   │   │       ├── auth.controller.test.js  # Tests for auth controller (placeholder)
+│   │   │       └── auth.service.test.js     # Tests for auth service (placeholder)
+│   │   │
+│   │   ├── user/
+│   │   │   ├── user.controller.js  # User route handlers (from usersControllers.js)
+│   │   │   ├── user.model.js       # User Mongoose model (from userModel.js)
+│   │   │   ├── user.routes.js      # User Express routes (from userRouters.js)
+│   │   │   ├── user.service.js     # User business logic (placeholder)
+│   │   │   ├── user.validator.js   # User request validation (placeholder)
+│   │   │   └── __tests__/
+│   │   │       ├── user.controller.test.js  # Tests for user controller (placeholder)
+│   │   │       └── user.service.test.js     # Tests for user service (placeholder)
+│   │   │
+│   │   ├── document/        # Document management (placeholder)
+│   │   ├── folder/          # Folder management (placeholder)
+│   │   ├── image/           # Image handling (placeholder)
+│   │   ├── share/           # Sharing functionality (placeholder)
+│   │   └── device/          # Device management (placeholder)
+│   │
+│   ├── uploads/            # User-uploaded files (directory for file storage)
+│   │
+│   ├── docs/
+│   │   ├── swagger.yaml    # OpenAPI/Swagger documentation (placeholder)
+│   │   └── postman_collection.json  # Postman collection (placeholder)
+│   │
+│   └── tests/
+│       ├── unit/
+│       │   ├── auth.test.js        # Unit tests for auth (placeholder)
+│       │   ├── user.test.js        # Unit tests for user (placeholder)
+│       │   └── document.test.js    # Unit tests for document (placeholder)
+│       │
+│       └── integration/
+│           ├── auth.integration.test.js    # Integration tests for auth (placeholder)
+│           ├── user.integration.test.js    # Integration tests for user (placeholder)
+│           └── document.integration.test.js  # Integration tests for document (placeholder)
+│
+├── app.js                  # Main application entry point (new, replaces server.js)
+├── .env                    # Environment variables
+├── .gitignore              # Git ignore file
+├── package.json            # Project metadata and dependencies
+└── README.md               # Project documentation

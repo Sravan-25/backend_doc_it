@@ -1,0 +1,30 @@
+2025-05-06 23:32:13 [[31merror[39m]: Marker file missing after delay
+2025-05-06 23:36:29 [[31merror[39m]: Auth Middleware Error: Operation `users.findOne()` buffering timed out after 10000ms
+2025-05-06 23:37:03 [[31merror[39m]: Error uploading document: validateSingleFileByFolderType is not defined
+2025-05-06 23:37:03 [[31merror[39m]: Error uploading document:
+2025-05-06 23:37:59 [[31merror[39m]: Error uploading document: validateSingleFileByFolderType is not defined
+2025-05-06 23:37:59 [[31merror[39m]: Error uploading document:
+2025-05-06 23:43:01 [[31merror[39m]: Error uploading document: validateSingleFileByFolderType is not defined
+2025-05-06 23:43:01 [[31merror[39m]: Error uploading document:
+2025-05-06 23:46:51 [[31merror[39m]: Error uploading document: Document validation failed: filePath: Path `filePath` is required.
+2025-05-06 23:46:51 [[31merror[39m]: Error uploading document:
+2025-05-07 09:55:29 [[31merror[39m]: MongoDB Connection Error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-05-07 12:40:22 [[31merror[39m]: Error uploading document: Document validation failed: fileSize: Path `fileSize` is required., fileType: Path `fileType` is required.
+2025-05-07 12:40:22 [[31merror[39m]: Error uploading document: ENOENT: no such file or directory, unlink 'E:\doc-it-backend-service\uploads\documents\Adhar Cards.pdf-1746601822012-ee84735f-913b-4ea9-b4ae-3487f787892a.pdf'
+2025-05-07 12:40:54 [[31merror[39m]: Error uploading document: Document validation failed: fileSize: Path `fileSize` is required., fileType: Path `fileType` is required.
+2025-05-07 12:40:54 [[31merror[39m]: Error uploading document: ENOENT: no such file or directory, unlink 'E:\doc-it-backend-service\uploads\documents\mml-book-1746601854767-3e7d5923-2f28-4714-9076-a80cd24676af.pdf'
+2025-05-07 13:08:23 [[31merror[39m]: Upload error: Multer error: Unexpected field (field: document)
+2025-05-07 13:08:34 [[31merror[39m]: Upload error: Multer error: Unexpected field (field: document)
+2025-05-07 13:09:05 [[31merror[39m]: Upload error: Multer error: Unexpected field (field: document)
+2025-05-07 14:58:23 [[31merror[39m]: Upload error: Only pdf, doc, docx, txt files are allowed
+2025-05-07 15:05:03 [[31merror[39m]: Error downloading document: currentFolder.documents is not iterable
+2025-05-07 15:05:03 [[31merror[39m]: Error downloading document:
+2025-05-07 15:06:00 [[31merror[39m]: Error downloading document: currentFolder.documents is not iterable
+2025-05-07 15:06:00 [[31merror[39m]: Error downloading document:
+2025-05-07 16:43:00 [[31merror[39m]: Error downloading document: currentFolder.documents is not iterable
+2025-05-07 16:43:00 [[31merror[39m]: Error downloading document:
+2025-05-07 17:07:27 [[31merror[39m]: Upload error: Multer error: Unexpected field (field: filePath)
+2025-05-07 17:12:23 [[31merror[39m]: Error uploading image: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+2025-05-07 17:12:23 [[31merror[39m]: Error uploading image:
+2025-05-07 17:25:53 [[31merror[39m]: Error uploading image:
+2025-05-07 18:03:52 [[31merror[39m]: Upload error: Multer error: Unexpected field (field: image)

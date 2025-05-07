@@ -1,0 +1,81 @@
+{
+  "name": "docit-backend",
+  "version": "1.0.0",
+  "description": "Backend for Doc IT application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest --watchAll --detectOpenHandles",
+    "test:ci": "jest --ci --runInBand --detectOpenHandles",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "prestart": "npm run lint && npm run format",
+    "build": "echo 'No build step required for now'"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "docit-backend": "file:",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-validator": "^7.0.1",
+    "google-auth-library": "^8.9.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2",
+    "nodemailer": "^6.9.5",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "swagger-ui-express": "^5.0.1",
+    "util": "^0.12.5",
+    "uuid": "^11.1.0",
+    "winston": "^3.10.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/supertest": "^6.0.3",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.0",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/tests/"
+    ],
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ]
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/docit-backend.git"
+  },
+  "keywords": [
+    "backend",
+    "docit",
+    "express",
+    "nodejs",
+    "mongodb",
+    "authentication"
+  ],
+  "author": "Sravan Kumar",
+  "license": "MIT",
+  "private": true
+}

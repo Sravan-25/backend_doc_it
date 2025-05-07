@@ -1,0 +1,1194 @@
+openapi: 3.0.0
+info:
+  title: Doc IT API
+  description: Backend API for Doc IT application
+  version: 1.0.0
+  contact:
+    email: support@docit.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:5000/api/v1
+    description: Development server
+  - url: https://api.docit.com/api/v1
+    description: Production server
+
+tags:
+  - name: Authentication
+    description: User authentication and authorization
+  - name: Users
+    description: User management
+  - name: Devices
+    description: Device management
+  - name: Documents
+    description: Document management
+  - name: Images
+    description: Image management
+  - name: Folders
+    description: Folder management
+
+paths:
+  /auth/signup:
+    post:
+      tags: [Authentication]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignUp'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /auth/signin:
+    post:
+      tags: [Authentication]
+      summary: Login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+
+  /auth/send-otp:
+    post:
+      tags: [Authentication]
+      summary: Send OTP to user's email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendOTPRequest'
+      responses:
+        '200':
+          description: OTP sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /auth/verify-otp:
+    post:
+      tags: [Authentication]
+      summary: Verify user's OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyOTPRequest'
+      responses:
+        '200':
+          description: OTP verified successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /users:
+    get:
+      tags: [Users]
+      summary: Get all users
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /users/{id}:
+    get:
+      tags: [Users]
+      summary: Get a specific user by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    put:
+      tags: [Users]
+      summary: Update a specific user by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: User ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    delete:
+      tags: [Users]
+      summary: Delete a specific user by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: User ID
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /devices:
+    get:
+      tags: [Devices]
+      summary: Get all devices
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of devices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /devices/add-device:
+    post:
+      tags: [Devices]
+      summary: Add a new device
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddDeviceRequest'
+      responses:
+        '201':
+          description: Device created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /devices/{id}:
+    get:
+      tags: [Devices]
+      summary: Get a specific device by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Device ID
+      responses:
+        '200':
+          description: Device details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    patch:
+      tags: [Devices]
+      summary: Update a device
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Device ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeviceRequest'
+      responses:
+        '200':
+          description: Device updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    delete:
+      tags: [Devices]
+      summary: Delete a device
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Device ID
+      responses:
+        '200':
+          description: Device deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /folders/create:
+    post:
+      tags: [Folders]
+      summary: Create a new folder
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFolderRequest'
+      responses:
+        '201':
+          description: Folder created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /folders:
+    get:
+      tags: [Folders]
+      summary: Get all folders
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of folders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /folders/{id}:
+    get:
+      tags: [Folders]
+      summary: Get a specific folder by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Folder ID
+      responses:
+        '200':
+          description: Folder details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    put:
+      tags: [Folders]
+      summary: Update a folder
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Folder ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFolderRequest'
+      responses:
+        '200':
+          description: Folder updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    delete:
+      tags: [Folders]
+      summary: Delete a folder
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Folder ID
+      responses:
+        '200':
+          description: Folder deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /folders/upload/{folderId}:
+    post:
+      tags: [Folders]
+      summary: Upload multiple files to a folder
+      description: Upload multiple documents or images to the specified folder
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          description: The ID of the folder to upload files into
+          schema:
+            type: string
+            pattern: '^[a-fA-F0-9]{24}$'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - files
+      responses:
+        '201':
+          description: Files uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /folders/download/{id}:
+    get:
+      tags: [Folders]
+      summary: Download a folder
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Folder ID
+      responses:
+        '200':
+          description: Folder download
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /documents/upload/{folderId}:
+    post:
+      tags: [Documents]
+      summary: Upload a single document to a folder
+      description: Upload a single document (PDF, DOC, DOCX) to the specified folder
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          description: The ID of the folder to upload the document to
+          schema:
+            type: string
+            pattern: '^[a-fA-F0-9]{24}$'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - document
+              properties:
+                name:
+                  type: string
+                  description: Name of the document
+                  example: document.pdf
+                document:
+                  type: string
+                  format: binary
+                  description: The document file to upload (PDF, DOC, DOCX)
+      responses:
+        '201':
+          description: Document uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /documents/upload-multiple/{folderId}:
+    post:
+      tags: [Documents]
+      summary: Upload multiple documents to a folder
+      description: Upload two documents (PDF, DOC, DOCX) to the specified folder
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          description: The ID of the folder to upload the documents to
+          schema:
+            type: string
+            pattern: '^[a-fA-F0-9]{24}$'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name1
+                - name2
+                - document
+                - document2
+              properties:
+                name1:
+                  type: string
+                  description: Name of the first document
+                  example: document1.pdf
+                name2:
+                  type: string
+                  description: Name of the second document
+                  example: document2.pdf
+                document:
+                  type: string
+                  format: binary
+                  description: First document file to upload (PDF, DOC, DOCX)
+                document2:
+                  type: string
+                  format: binary
+                  description: Second document file to upload (PDF, DOC, DOCX)
+      responses:
+        '201':
+          description: Documents uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /documents:
+    get:
+      tags: [Documents]
+      summary: Get all documents
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of documents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /documents/{id}:
+    get:
+      tags: [Documents]
+      summary: Get a specific document by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Document ID
+      responses:
+        '200':
+          description: Document details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    put:
+      tags: [Documents]
+      summary: Update a document by ID
+      description: Updates an existing document's name and/or files. All fields except ID are optional.
+      operationId: updateDocumentById
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the document to update (MongoDB ObjectId)
+          schema:
+            type: string
+            pattern: '^[0-9a-fA-F]{24}$'
+            example: 507f1f77bcf86cd799439011
+      requestBody:
+        required: false
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name1:
+                  type: string
+                  description: Name of the first document (required if provided, must be non-empty)
+                  example: UpdatedFirstDocument
+                name2:
+                  type: string
+                  description: Name of the second document (optional, can be empty or omitted)
+                  example: UpdatedSecondDocument
+                document:
+                  type: string
+                  format: binary
+                  description: 'First document file (optional, supported types: pdf, doc, docx, txt)'
+                document2:
+                  type: string
+                  format: binary
+                  description: 'Second document file (optional, supported types: pdf, doc, docx, txt)'
+              required: []
+      responses:
+        '200':
+          description: Document updated successfully
+
+    delete:
+      tags: [Documents]
+      summary: Delete a document
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Document ID
+      responses:
+        '200':
+          description: Document deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /documents/download/{id}:
+    get:
+      tags: [Documents]
+      summary: Download a document
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema RANK: 1
+          type: string
+          description: Document ID
+      responses:
+        '200':
+          description: Document download
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /images:
+    get:
+      tags: [Images]
+      summary: Get all images
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of images
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /images/{id}:
+    get:
+      tags: [Images]
+      summary: Get a specific image by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Image ID
+      responses:
+        '200':
+          description: Image details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    put:
+      tags: [Images]
+      summary: Update an image
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Image ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateImageRequest'
+      responses:
+        '200':
+          description: Image updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+    delete:
+      tags: [Images]
+      summary: Delete an image
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Image ID
+      responses:
+        '200':
+          description: Image deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /images/upload/{id}:
+    post:
+      tags: [Images]
+      summary: Upload a single image
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: folderId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^[a-fA-F0-9]{24}$'
+          description: Folder ID to upload to
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - image
+              properties:
+                name:
+                  type: string
+                  example: profile.jpg
+                  description: Name of the image
+                image:
+                  type: string
+                  format: binary
+                  description: The image file to upload (JPEG, PNG, GIF)
+      responses:
+        '201':
+          description: Image uploaded successfully
+
+  /images/download/{id}:
+    get:
+      tags: [Images]
+      summary: Download an image
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Image ID
+      responses:
+        '200':
+          description: Image download
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+  /images/upload-multiple/{id}:
+    post:
+      tags: [Images]
+      summary: Upload multiple images
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Folder ID to upload to
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - image
+                - name2
+                - image2
+              properties:
+                name:
+                  type: string
+                  example: image1.jpg
+                  description: Name of the first image
+                name2:
+                  type: string
+                  example: image2.png
+                  description: Name of the second image
+                image:
+                  type: string
+                  format: binary
+                  description: First image file to upload (JPEG, PNG, GIF)
+                image2:
+                  type: string
+                  format: binary
+                  description: Second image file to upload (JPEG, PNG, GIF)
+      responses:
+        '201':
+          description: Images uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+
+    UserSignUp:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - confirmPassword
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+        password:
+          type: string
+          example: Password123!
+        confirmPassword:
+          type: string
+          example: Password123!
+
+    UserLogin:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: john@example.com
+        password:
+          type: string
+          example: Password123!
+
+    SendOTPRequest:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          example: john@example.com
+
+    VerifyOTPRequest:
+      type: object
+      required:
+        - email
+        - code
+      properties:
+        email:
+          type: string
+          example: john@example.com
+        code:
+          type: string
+          example: '123456'
+
+    updateUser:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Updated Name
+          description: New name for the user
+        email:
+          type: string
+          example: updated@example.com
+          description: New email for the user
+        password:
+          type: string
+          example: NewPassword123!
+          description: New password for the user
+      minProperties: 1
+      description: At least one field must be provided for update
+
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Login successful
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        user:
+          $ref: '#/components/schemas/User'
+
+    Device:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        deviceName:
+          type: string
+          example: Office Server
+        publicIp:
+          type: string
+          example: 192.168.1.100
+        passkey:
+          type: string
+          example: securePasskey123
+        owner:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AddDeviceRequest:
+      type: object
+      required:
+        - deviceName
+        - publicIp
+        - passkey
+      properties:
+        deviceName:
+          type: string
+          example: Office Server
+          description: Name of the device
+        publicIP:
+          type: string
+          example: 192.168.1.100
+          description: Public IP address of the device
+        passKey:
+          type: string
+          example: securePasskey123
+          description: Passkey for device authentication
+
+    UpdateDeviceRequest:
+      type: object
+      properties:
+        deviceName:
+          type: string
+          example: Updated Device Name
+          description: New name for the device
+        publicIP:
+          type: string
+          example: 192.168.1.101
+          description: New public IP address
+        passKey:
+          type: string
+          example: newSecurePasskey123
+          description: New passkey for the device
+      minProperties: 1
+      description: At least one field must be provided for update
+
+    Folder:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        name:
+          type: string
+          example: Project Documents
+        type:
+          type: string
+          example: project
+        files:
+          type: array
+          items:
+            type: string
+          example: [file1.pdf, file2.jpg]
+        owner:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Document:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        name:
+          type: string
+          example: contract.pdf
+        filePath:
+          type: string
+          example: /Uploads/contract.pdf
+        name2:
+          type: string
+          example: contract2.pdf
+        filePath2:
+          type: string
+          example: /Uploads/contract2.pdf
+        folder:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        uploadedBy:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        uploadedAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UpdateDocumentRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: updated-contract.pdf
+          description: New name for the first document
+        name2:
+          type: string
+          example: additional-doc.pdf
+          description: New name for the second document
+      minProperties: 1
+      description: At least one field must be provided for update
+
+    Image:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        name:
+          type: string
+          example: profile.jpg
+        filePath:
+          type: string
+          example: /Uploads/images/profile.jpg
+        size:
+          type: number
+          example: 2048
+        type:
+          type: string
+          example: jpg
+        dimensions:
+          type: object
+          properties:
+            width:
+              type: number
+              example: 800
+            height:
+              type: number
+              example: 600
+        owner:
+          type: string
+          example: 507f1f77bcf86cd799439011
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UpdateImageRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: updated-profile.jpg
+          description: New name for the image
+      minProperties: 1
+      description: At least one field must be provided for update
+
+    CreateFolderRequest:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          example: Project Documents
+          description: Name of the folder
+        type:
+          type: string
+          example: project
+          description: Type of the folder
+
+    UpdateFolderRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Updated Folder Name
+          description: New name for the folder
+        type:
+          type: string
+          example: updated-type
+          description: New type for the folder
+      minProperties: 1
+      description: At least one field must be provided for update
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Operation successful
+        data:
+          type: object
+          additionalProperties: true
+          example:
+            _id: 507f1f77bcf86cd799439011
+            name: document.pdf
+            filePath: /Uploads/document.pdf
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: Unexpected field
+        message:
+          type: string
+          example: An error occurred
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
